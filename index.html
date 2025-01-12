@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diagram Display</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #ffe4e1;
+      color: #333;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .heading {
+      font-size: 2em;
+      color: #d14787;
+      font-weight: 700;
+      margin-top: 30px;
+    }
+
+    .diagram-gallery {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .diagram-gallery p {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: #b56576;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .diagram-gallery p:hover {
+      color: #f4978e;
+      text-decoration: underline;
+    }
+
+    #displayedImage {
+      width: 100%;
+      max-width: 800px;
+      height: auto;
+      margin-top: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      cursor: pointer; /* Make the image clickable */
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px;
+      background-color: #ffefef;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="mainContent">
+    <div class="heading">Salon App Diagrams</div>
+
+    <div class="diagram-gallery">
+      <p onclick="showImage('classDiagram')">Class Diagram</p>
+      <p onclick="showImage('erDiagram')">ER Diagram</p>
+      <p onclick="showImage('useCaseDiagram')">Use Case Diagram</p>
+      <p onclick="showImage('activityDiagram')">Activity Diagram</p>
+      <p onclick="showImage('sequenceDiagram')">Sequence Diagram</p>
+    </div>
+  </div>
+
+  <div id="imageContainer" class="hidden">
+    <img id="displayedImage" src="" alt="Displayed Diagram" onclick="goBack()"> <!-- Clicking the image triggers goBack -->
+  </div>
+
+  <script>
+    function showImage(imageName) {
+      const imgElement = document.getElementById("displayedImage");
+      const mainContent = document.getElementById("mainContent");
+      const imageContainer = document.getElementById("imageContainer");
+
+      let filePath = "";
+
+      // Determine file path based on diagram name
+      switch (imageName) {
+        case 'classDiagram':
+          filePath = "class.png"; // Path to class diagram
+          break;
+        case 'erDiagram':
+          filePath = "er.png"; // Path to ER diagram
+          break;
+        case 'useCaseDiagram':
+          filePath = "use_case.png"; // Path to use case diagram
+          break;
+        case 'activityDiagram':
+          filePath = "activity.png"; // Path to activity diagram
+          break;
+        case 'sequenceDiagram':
+          filePath = "sequence.png"; // Path to sequence diagram
+          break;
+        default:
+          alert("Image not found!");
+          return;
+      }
+
+      // Update the image source and toggle visibility
+      imgElement.src = filePath;
+      mainContent.classList.add("hidden");
+      imageContainer.classList.remove("hidden");
+    }
+
+    function goBack() {
+      const mainContent = document.getElementById("mainContent");
+      const imageContainer = document.getElementById("imageContainer");
+
+      // Hide the image container and show the main content
+      imageContainer.classList.add("hidden");
+      mainContent.classList.remove("hidden");
+    }
+  </script>
+</body>
+</html>
